@@ -1,0 +1,26 @@
+name: Add issue project
+
+on:
+  # Issue が作成されたとき
+  issues:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    steps:
+      # 一時的なトークンを生成する
+      - name: generate token
+        uses: getsentry/action-github-app-token@v2.0.0
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.PRIVATE_KEY }}
+      # Issue をプロジェクトに追加する
+      - name: add to project
+        uses: actions/add-to-project@v0.4.1
+        with:
+          project-url: https://github.com/orgs/{org_name}/projects/{org_number}
+          github-token: ${{ steps.generate_token.outputs.token }}
