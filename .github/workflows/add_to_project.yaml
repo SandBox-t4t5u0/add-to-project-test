@@ -22,5 +22,5 @@ jobs:
       - name: add to project
         uses: actions/add-to-project@v0.4.1
         with:
-          project-url: https://github.com/orgs/{org_name}/projects/{org_number}
+          project-url: https://github.com/orgs/SandBox-t4t5u0/projects/1
           github-token: ${{ steps.generate_token.outputs.token }}
